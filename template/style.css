@@ -7,3 +7,10 @@ body {
     height: 123px;
     background: #FFF;
 }
+
+.edit-btn{
+    float: right;
+}
+.delete-btn{
+    float: right;
+}

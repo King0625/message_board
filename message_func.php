@@ -24,10 +24,23 @@
         $result = mysqli_query($connection, $query);
         while($row = mysqli_fetch_assoc($result)){
             echo "<div class='message'>";
-            echo "<h3>".$row['user']."</h3>";
+            echo "<h2>".$row['user']."</h2>";
+            
             echo $row['date']."<br>";
-            echo $row['message']."<br>";
+            echo $row['message']."<br><br>";
+            // echo "<p>Replies:</p>";
+            // echo "<p>".$row['reply']."</p><br>";
+            // echo "<input type='text' placeholder='Your reply'>";
+            // echo "<form class='reply-btn' action='".addReply()."' method='POST'>
+            // <input type='hidden' name='name' value='".$row['user']."'>
+            // <input type='submit' name='reply' value='reply'>
+            // </form>";
 
+            echo "<form class='delete-btn' action='".deleteComment()."' method='POST'>
+            <input type='hidden' name='cid' value='".$row['cid']."'>
+            <input type='submit' name='delete' value='delete'>
+            </form>";
+            
             echo "<form class='edit-btn' action='editMessage.php' method='POST'>
             <input type='hidden' name='cid' value='".$row['cid']."'>
             <input type='hidden' name='user' value='".$row['user']."'>
@@ -35,21 +48,12 @@
             <input type='hidden' name='message' value='".$row['message']."'>
             <input type='submit' name='edit' value='edit'>
             </form>";
-
-            echo "<form class='delete-btn' action='".deleteComment()."' method='POST'>
-            <input type='hidden' name='cid' value='".$row['cid']."'>
-            <input type='submit' name='delete' value='delete'>
-            </form>";
-
-
-            echo "</div>"; 
-
-            
+            echo "</div>";            
         }      
     }
 
     function editComment(){
-        if(isset($_POST['publish'])){
+        if(isset($_POST['editing'])){
             // include "connect.php";
             global $connection;
             $cid = $_POST['cid'];
@@ -57,7 +61,7 @@
             $date = $_POST['date'];
             $message = $_POST['message'];
 
-            $query = "UPDATE comments SET message='$message' WHERE cid='$cid'";
+            $query = "UPDATE comments SET message='$message', date='$date' WHERE cid='$cid'";
             $result = mysqli_query($connection, $query);
             header("Location: index.php");
 
@@ -75,4 +79,19 @@
 
         }
     }
+
+    // function addReply(){
+    //     if(isset($_POST['reply'])){
+    //         global $connection;
+    //         // $user = $_POST['user'];
+    //         $reply = $_POST['reply'];
+
+    //         $query = "INSERT INTO comments(reply) VALUES('$reply')";
+    //         $result = mysqli_query($connection, $query);
+    //     }
+    // }
+
+    // function showReply(){
+
+    // }
 ?>

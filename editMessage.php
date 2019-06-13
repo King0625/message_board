@@ -16,10 +16,10 @@
         echo "<form action='".editComment()."' method='POST'>
         <input type='hidden' name='cid' value='$cid'>
         <input type='hidden' name='user' value='$user'>
-        <input type='hidden' name='date' value='$date'>
+        <input type='hidden' name='date' value='".date('Y-m-d H:i:s')."'>
         <textarea name='message' id='message' cols='50' rows='5' placeholder='How do you do today??'>$message</textarea>
         <br>
-        <input type='submit' name='publish' value='edit'>
+        <input type='submit' name='editing' value='editing'>
         </form>";
 
     ?>
